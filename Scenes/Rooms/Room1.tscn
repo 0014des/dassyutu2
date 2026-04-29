@@ -1,0 +1,113 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/Player.tscn" id="1_pl"]
+[ext_resource type="Script" path="res://Scripts/Gimmicks/Door.gd" id="2_dr"]
+[ext_resource type="Script" path="res://Scripts/Gimmicks/Key.gd" id="3_ky"]
+[ext_resource type="Script" path="res://Scripts/Gimmicks/Clock.gd" id="4_cl"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Wall"]
+albedo_color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_Door"]
+size = Vector3(1, 2, 0.1)
+
+[sub_resource type="BoxShape3D" id="Shape_Door"]
+size = Vector3(1, 2, 0.1)
+
+[sub_resource type="BoxMesh" id="Mesh_Key"]
+size = Vector3(0.2, 0.1, 0.2)
+
+[sub_resource type="BoxShape3D" id="Shape_Key"]
+size = Vector3(0.2, 0.1, 0.2)
+
+[sub_resource type="CylinderMesh" id="Mesh_Clock"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.1
+
+[sub_resource type="CylinderShape3D" id="Shape_Clock"]
+radius = 0.3
+height = 0.1
+
+[node name="Room1" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+omni_range = 10.0
+
+[node name="Floor" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+use_collision = true
+size = Vector3(5, 0.1, 5)
+material = SubResource("Mat_Wall")
+
+[node name="Ceiling" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.05, 0)
+use_collision = true
+size = Vector3(5, 0.1, 5)
+material = SubResource("Mat_Wall")
+
+[node name="WallN" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -2.5)
+use_collision = true
+size = Vector3(5, 3, 0.1)
+material = SubResource("Mat_Wall")
+
+[node name="WallS" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2.5)
+use_collision = true
+size = Vector3(5, 3, 0.1)
+material = SubResource("Mat_Wall")
+
+[node name="WallE" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.5, 0)
+use_collision = true
+size = Vector3(0.1, 3, 5)
+material = SubResource("Mat_Wall")
+
+[node name="WallW" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, 0)
+use_collision = true
+size = Vector3(0.1, 3, 5)
+material = SubResource("Mat_Wall")
+
+[node name="Desk" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 0)
+use_collision = true
+size = Vector3(1, 1, 0.5)
+
+[node name="Door" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.45)
+script = ExtResource("2_dr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
+mesh = SubResource("Mesh_Door")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
+shape = SubResource("Shape_Door")
+
+[node name="Key" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+script = ExtResource("3_ky")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Key"]
+mesh = SubResource("Mesh_Key")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Key"]
+shape = SubResource("Shape_Key")
+
+[node name="Clock" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.5, -2.4)
+script = ExtResource("4_cl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Clock"]
+mesh = SubResource("Mesh_Clock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Clock"]
+shape = SubResource("Shape_Clock")
+
+[node name="Player" parent="." instance=ExtResource("1_pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)

@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Gimmicks/RotationButton.gd" id="1_rb"]
+[ext_resource type="Script" path="res://Scripts/Gimmicks/Room3Switch.gd" id="2_sw"]
+[ext_resource type="Script" path="res://Scripts/Gimmicks/Room3Door.gd" id="3_dr"]
+[ext_resource type="PackedScene" path="res://Scenes/Player.tscn" id="4_pl"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Wall"]
+albedo_color = Color(0.6, 0.7, 0.8, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Red"]
+albedo_color = Color(0.8, 0.2, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_Pillar"]
+size = Vector3(1, 1, 1)
+[sub_resource type="BoxShape3D" id="Shape_Pillar"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_Switch"]
+size = Vector3(0.5, 0.5, 0.5)
+material = SubResource("Mat_Red")
+
+[sub_resource type="BoxShape3D" id="Shape_Switch"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="Mesh_Door"]
+size = Vector3(2, 2, 0.2)
+[sub_resource type="BoxShape3D" id="Shape_Door"]
+size = Vector3(2, 2, 0.2)
+
+[node name="Room3" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+omni_range = 20.0
+
+[node name="Pillar" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_rb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillar"]
+mesh = SubResource("Mesh_Pillar")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar"]
+shape = SubResource("Shape_Pillar")
+
+[node name="RotatableRoom" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="Floor" type="CSGBox3D" parent="RotatableRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.25, 0)
+use_collision = true
+size = Vector3(10, 0.5, 10)
+material = SubResource("Mat_Wall")
+
+[node name="Ceiling" type="CSGBox3D" parent="RotatableRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
+use_collision = true
+size = Vector3(10, 0.5, 10)
+material = SubResource("Mat_Wall")
+
+[node name="WallN" type="CSGBox3D" parent="RotatableRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.25)
+use_collision = true
+size = Vector3(10, 10, 0.5)
+material = SubResource("Mat_Wall")
+
+[node name="WallS" type="CSGBox3D" parent="RotatableRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.25)
+use_collision = true
+size = Vector3(10, 10, 0.5)
+material = SubResource("Mat_Wall")
+
+[node name="WallE" type="CSGBox3D" parent="RotatableRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 0, 0)
+use_collision = true
+size = Vector3(0.5, 10, 10)
+material = SubResource("Mat_Wall")
+
+[node name="WallW" type="CSGBox3D" parent="RotatableRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25, 0, 0)
+use_collision = true
+size = Vector3(0.5, 10, 10)
+material = SubResource("Mat_Wall")
+
+[node name="Platform" type="CSGBox3D" parent="RotatableRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -4.5, 0)
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Switch" type="StaticBody3D" parent="RotatableRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+script = ExtResource("2_sw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RotatableRoom/Switch"]
+mesh = SubResource("Mesh_Switch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotatableRoom/Switch"]
+shape = SubResource("Shape_Switch")
+
+[node name="Door" type="StaticBody3D" parent="RotatableRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4.9)
+script = ExtResource("3_dr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RotatableRoom/Door"]
+mesh = SubResource("Mesh_Door")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotatableRoom/Door"]
+shape = SubResource("Shape_Door")
+
+[node name="Player" parent="." instance=ExtResource("4_pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)

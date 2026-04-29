@@ -1,0 +1,104 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Rooms/Room5.gd" id="1_r5"]
+[ext_resource type="PackedScene" path="res://Scenes/Player.tscn" id="2_pl"]
+[ext_resource type="PackedScene" path="res://Scenes/Gimmicks/Clone.tscn" id="3_cl"]
+[ext_resource type="Script" path="res://Scripts/Gimmicks/Recorder.gd" id="4_rc"]
+[ext_resource type="Script" path="res://Scripts/Gimmicks/PressurePlate.gd" id="5_pp"]
+[ext_resource type="Script" path="res://Scripts/Gimmicks/Room5Door.gd" id="6_dr"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Floor"]
+albedo_color = Color(0.1, 0.1, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_Recorder"]
+size = Vector3(0.5, 1, 0.5)
+
+[sub_resource type="BoxShape3D" id="Shape_Recorder"]
+size = Vector3(0.5, 1, 0.5)
+
+[sub_resource type="BoxMesh" id="Mesh_Plate"]
+size = Vector3(1.5, 0.1, 1.5)
+
+[sub_resource type="BoxShape3D" id="Shape_Plate"]
+size = Vector3(1.5, 0.1, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Door"]
+albedo_color = Color(0.3, 0.3, 0.4, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_Door"]
+size = Vector3(2, 2.5, 0.2)
+material = SubResource("Mat_Door")
+
+[sub_resource type="BoxShape3D" id="Shape_Door"]
+size = Vector3(2, 2.5, 0.2)
+
+[node name="Room5" type="Node3D"]
+script = ExtResource("1_r5")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+omni_range = 20.0
+
+[node name="Floor" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+use_collision = true
+size = Vector3(15, 0.1, 15)
+material = SubResource("Mat_Floor")
+
+[node name="WallN" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -7.5)
+use_collision = true
+size = Vector3(15, 5, 0.5)
+
+[node name="WallS" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 7.5)
+use_collision = true
+size = Vector3(15, 5, 0.5)
+
+[node name="Recorder" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -3)
+script = ExtResource("4_rc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Recorder"]
+mesh = SubResource("Mesh_Recorder")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Recorder"]
+shape = SubResource("Shape_Recorder")
+
+[node name="SwitchA" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5.5)
+script = ExtResource("5_pp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SwitchA"]
+mesh = SubResource("Mesh_Plate")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SwitchA"]
+shape = SubResource("Shape_Plate")
+
+[node name="SwitchB" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5.5)
+script = ExtResource("5_pp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SwitchB"]
+mesh = SubResource("Mesh_Plate")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SwitchB"]
+shape = SubResource("Shape_Plate")
+
+[node name="Door" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 7.3)
+script = ExtResource("6_dr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
+mesh = SubResource("Mesh_Door")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
+shape = SubResource("Shape_Door")
+
+[node name="Clone" parent="." instance=ExtResource("3_cl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
