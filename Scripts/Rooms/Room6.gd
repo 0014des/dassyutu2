@@ -17,6 +17,8 @@ var perspective_solved = false
 
 func _ready() -> void:
 	clone.hide()
+	# 基本BGMの再生
+	GameManager.play_bgm("res://sound/基本BGM.mp3", 3.0)
 
 func start_recording() -> void:
 	recording.clear()
@@ -25,6 +27,8 @@ func start_recording() -> void:
 	clone.hide()
 	record_timer = 0.0
 	GameManager.add_log("【最終統合】記録開始！スイッチAに乗って待機してください。")
+	# 分身記録中のBGMに切り替え
+	GameManager.play_bgm("res://sound/分身作ってる時に流れるBGM.mp3")
 
 func _physics_process(delta: float) -> void:
 	if is_recording:
@@ -38,6 +42,8 @@ func _physics_process(delta: float) -> void:
 		if recording.size() >= MAX_RECORD_TIME / INTERVAL:
 			is_recording = false
 			GameManager.add_log("記録終了！部屋を回転させて視点を合わせてください。")
+			# 基本BGMに戻す
+			GameManager.play_bgm("res://sound/基本BGM.mp3", 3.0)
 			start_playing()
 
 	if is_playing:
@@ -69,7 +75,7 @@ func _process(_delta: float) -> void:
 	var is_rotated = abs(fmod(rotatable_room.rotation_degrees.x, 360.0) - 90.0) < 5.0
 	perspective_solved = (dist < 1.0 and dot > 0.98 and is_rotated)
 	
-	# 全条件達成
-	if $RotatableRoom/SwitchA.is_pressed and $SwitchB.is_pressed and perspective_solved:
+	# 全条件達成（視点合わせを無効化し、スイッチのみで判定）
+	if $RotatableRoom/SwitchA.is_pressed and $SwitchB.is_pressed:
 		if door.has_method("unlock"):
 			door.unlock()

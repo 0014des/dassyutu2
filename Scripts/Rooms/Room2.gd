@@ -4,6 +4,7 @@ extends Node3D
 
 func _ready() -> void:
 	_update_loop_state()
+	GameManager.play_bgm("res://sound/基本BGM.mp3", 3.0)
 
 func _process(delta: float) -> void:
 	if not player:

@@ -57,6 +57,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 7.5)
 use_collision = true
 size = Vector3(15, 5, 0.5)
 
+[node name="WallE" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 2.5, 0)
+use_collision = true
+size = Vector3(0.5, 5, 15)
+
+[node name="WallW" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 2.5, 0)
+use_collision = true
+size = Vector3(0.5, 5, 15)
+
 [node name="Recorder" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -3)
 script = ExtResource("4_rc")

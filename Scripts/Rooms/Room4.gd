@@ -4,6 +4,9 @@ extends Node3D
 @onready var door = $Door
 var solved = false
 
+func _ready() -> void:
+	GameManager.play_bgm("res://sound/基本BGM.mp3", 3.0)
+
 func _process(_delta: float) -> void:
 	if solved: return
 	if not player or not player.has_node("Camera3D"): return

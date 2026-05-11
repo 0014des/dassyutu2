@@ -1,0 +1,168 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8n9m0a1b2c3d"]
+
+[ext_resource type="Script" path="res://Scripts/UI/PauseMenu.gd" id="1_p1a2u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0, 0, 0, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(1, 1, 1, 0.05)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_p1a2u")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(450, 600)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 56
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "Resume"
+
+[node name="TitleButton" type="Button" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "Back to Title"
+
+[node name="CreditsButton" type="Button" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "View Credits"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "Settings"
+
+[node name="MuteButton" type="Button" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "AUDIO ON/OFF"
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="DebugLabel" type="Label" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+text = "DEBUG: Warp to Stage"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 3
+
+[node name="Warp1" type="Button" parent="CenterContainer/Panel/Margin/VBox/GridContainer"]
+layout_mode = 2
+text = "Room 1"
+
+[node name="Warp2" type="Button" parent="CenterContainer/Panel/Margin/VBox/GridContainer"]
+layout_mode = 2
+text = "Room 2"
+
+[node name="Warp3" type="Button" parent="CenterContainer/Panel/Margin/VBox/GridContainer"]
+layout_mode = 2
+text = "Room 3"
+
+[node name="Warp4" type="Button" parent="CenterContainer/Panel/Margin/VBox/GridContainer"]
+layout_mode = 2
+text = "Room 4"
+
+[node name="Warp5" type="Button" parent="CenterContainer/Panel/Margin/VBox/GridContainer"]
+layout_mode = 2
+text = "Room 5"
+
+[node name="Warp6" type="Button" parent="CenterContainer/Panel/Margin/VBox/GridContainer"]
+layout_mode = 2
+text = "Room 6"
+
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/TitleButton" to="." method="_on_title_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/MuteButton" to="." method="_on_mute_button_pressed"]
+[connection signal="value_changed" from="CenterContainer/Panel/Margin/VBox/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/GridContainer/Warp1" to="." method="_on_warp_button_pressed" binds= [1]]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/GridContainer/Warp2" to="." method="_on_warp_button_pressed" binds= [2]]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/GridContainer/Warp3" to="." method="_on_warp_button_pressed" binds= [3]]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/GridContainer/Warp4" to="." method="_on_warp_button_pressed" binds= [4]]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/GridContainer/Warp5" to="." method="_on_warp_button_pressed" binds= [5]]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/GridContainer/Warp6" to="." method="_on_warp_button_pressed" binds= [6]]

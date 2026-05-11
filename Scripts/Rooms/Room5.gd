@@ -14,6 +14,7 @@ const INTERVAL = 0.05
 
 func _ready() -> void:
 	clone.hide()
+	GameManager.play_bgm("res://sound/基本BGM.mp3", 3.0)
 
 func start_recording() -> void:
 	recording.clear()
@@ -22,6 +23,7 @@ func start_recording() -> void:
 	clone.hide()
 	record_timer = 0.0
 	GameManager.add_log("記録開始... 8秒間自由に動いてください！")
+	GameManager.play_bgm("res://sound/分身作ってる時に流れるBGM.mp3")
 
 func _physics_process(delta: float) -> void:
 	if is_recording:
@@ -33,6 +35,7 @@ func _physics_process(delta: float) -> void:
 		if recording.size() >= MAX_RECORD_TIME / INTERVAL:
 			is_recording = false
 			GameManager.add_log("記録終了！再生を開始します。")
+			GameManager.play_bgm("res://sound/基本BGM.mp3", 3.0)
 			start_playing()
 
 	if is_playing:

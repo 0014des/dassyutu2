@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://Scripts/Gimmicks/RotationButton.gd" id="1_rb"]
 [ext_resource type="Script" path="res://Scripts/Gimmicks/Room3Switch.gd" id="2_sw"]
 [ext_resource type="Script" path="res://Scripts/Gimmicks/Room3Door.gd" id="3_dr"]
 [ext_resource type="PackedScene" path="res://Scenes/Player.tscn" id="4_pl"]
+[ext_resource type="Script" path="res://Scripts/Rooms/Room3.gd" id="5_r3"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_Wall"]
 albedo_color = Color(0.6, 0.7, 0.8, 1)
@@ -29,6 +30,7 @@ size = Vector3(2, 2, 0.2)
 size = Vector3(2, 2, 0.2)
 
 [node name="Room3" type="Node3D"]
+script = ExtResource("5_r3")
 
 [node name="Environment" type="Node3D" parent="."]
 

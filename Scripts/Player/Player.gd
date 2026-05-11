@@ -13,6 +13,7 @@ var look_sensitivity = 0.002
 
 func _ready() -> void:
 	add_to_group("player")
+	# プレイ中はマウスを隠す
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if interact_label:
 		interact_label.hide()
@@ -20,16 +21,11 @@ func _ready() -> void:
 		log_label.text = ""
 
 func _unhandled_input(event: InputEvent) -> void:
+	# マウスがキャプチャされている時のみ視点移動を可能にする
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * look_sensitivity)
 		camera.rotate_x(-event.relative.y * look_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
-		
-	if event.is_action_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

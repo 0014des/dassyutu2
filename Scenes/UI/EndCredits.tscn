@@ -1,0 +1,209 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://Scripts/UI/EndCredits.gd" id="1_ec"]
+[ext_resource type="Texture2D" path="res://picture/土蜘蛛.png" id="2_ts"]
+[ext_resource type="Texture2D" path="res://picture/大釜.png" id="3_ok"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clear"]
+bg_color = Color(0, 0.4, 0, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 1, 0.4, 0.4)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skip"]
+bg_color = Color(0.1, 0.1, 0.1, 0.5)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="EndCredits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ec")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CreditsContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 1000.0
+theme_override_constants/separation = 70
+
+[node name="Padding" type="Control" parent="CreditsContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 84
+text = "Project Loop Room"
+horizontal_alignment = 1
+
+[node name="Role1" type="VBoxContainer" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Role" type="Label" parent="CreditsContainer/Role1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 28
+text = "企画・監督"
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="CreditsContainer/Role1"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "ユタラプトル"
+horizontal_alignment = 1
+
+[node name="Role2" type="VBoxContainer" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Role" type="Label" parent="CreditsContainer/Role2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 28
+text = "メインAI開発"
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="CreditsContainer/Role2"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "Gemini 3.1 Pro"
+horizontal_alignment = 1
+
+[node name="Role3" type="VBoxContainer" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Role" type="Label" parent="CreditsContainer/Role3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 28
+text = "技術指導・説明"
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="CreditsContainer/Role3"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "Gemini 3"
+horizontal_alignment = 1
+
+[node name="Role4" type="VBoxContainer" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Role" type="Label" parent="CreditsContainer/Role4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 28
+text = "UI・システム設計"
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="CreditsContainer/Role4"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "Antigravity AI"
+horizontal_alignment = 1
+
+[node name="FinalSpacer" type="Control" parent="CreditsContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="FinalDisplay" type="VBoxContainer" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Images" type="HBoxContainer" parent="CreditsContainer/FinalDisplay"]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Tsuchigumo" type="TextureRect" parent="CreditsContainer/FinalDisplay/Images"]
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 2
+texture = ExtResource("2_ts")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Okama" type="TextureRect" parent="CreditsContainer/FinalDisplay/Images"]
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 2
+texture = ExtResource("3_ok")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ClearButton" type="Button" parent="CreditsContainer/FinalDisplay"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.6, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_clear")
+text = "CLEAR ACHIEVED"
+
+[node name="SkipButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -80.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_skip")
+text = "SKIP CREDITS (P)"
+
+[connection signal="pressed" from="CreditsContainer/FinalDisplay/ClearButton" to="." method="_on_clear_button_pressed"]
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

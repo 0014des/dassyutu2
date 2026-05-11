@@ -5,9 +5,8 @@ var is_unlocked = false
 func interact(_player) -> void:
 	if is_unlocked:
 		GameManager.add_log("脱出成功！おめでとうございます！")
-		# 実際にはエンディング画面など
-		await get_tree().create_timer(3.0).timeout
-		get_tree().quit()
+		await get_tree().create_timer(2.0).timeout
+		GameManager.goto_scene("res://Scenes/UI/EndCredits.tscn")
 	else:
 		GameManager.add_log("【最終試練】分身・回転・視点をすべて合わせる必要がある。")
 
